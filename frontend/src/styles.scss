@@ -1,0 +1,257 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Import Google Fonts properly */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Poppins:wght@400;500;700&display=swap');
+
+/* CSS Variables - Light Theme (Default) */
+:root {
+  --color-primary: #1976d2;
+  --color-primary-light: #42a5f5;
+  --color-primary-dark: #0d47a1;
+  --color-primary-rgb: 25, 118, 210;
+  
+  --color-secondary: #ff9800;
+  --color-secondary-dark: #f57c00;
+  
+  --color-success: #4caf50;
+  --color-error: #f44336;
+  --color-warning: #ffc107;
+  
+  --color-background: #f8f9fa;
+  --color-background-secondary: #eef1f5;
+  --color-background-tertiary: #e9ecef;
+  
+  --color-card-background: #ffffff;
+  
+  --color-text: #212529;
+  --color-text-secondary: #6c757d;
+  
+  --color-border: #dee2e6;
+  
+  --color-hover: rgba(25, 118, 210, 0.1);
+  --color-focus-ring: rgba(25, 118, 210, 0.5);
+  
+  --color-elevation-1: 0 2px 5px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.07);
+  --color-elevation-2: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.07);
+  
+  --font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Dark Theme */
+body.dark-theme {
+  /* Primary colors - Refined blue palette */
+  --color-primary: hsl(210, 90%, 60%); /* #66a3ff - Brighter blue */
+  --color-primary-light: hsl(210, 90%, 70%); /* #99c2ff - Lighter blue */
+  --color-primary-dark: hsl(210, 90%, 45%); /* #3385ff - Deeper blue */
+  --color-primary-rgb: 102, 163, 255;
+  
+  /* Secondary colors - Warm orange */
+  --color-secondary: hsl(36, 100%, 65%); /* #ffb84d - Warmer orange */
+  --color-secondary-dark: hsl(36, 100%, 55%); /* #ffa31a - Deeper orange */
+  
+  /* Success & Error states */
+  --color-success: hsl(120, 60%, 50%); /* #4dcc4d - Vibrant green */
+  --color-error: hsl(0, 85%, 65%); /* #ff6666 - Softer red */
+  --color-warning: hsl(45, 100%, 60%); /* #ffd24d - Visible yellow */
+  
+  /* Background with color temperature - Darker blue tint for better contrast */
+  --color-background: hsl(222, 14%, 8%); /* #0f1117 - Deeper blue-tinted black */
+  --color-background-secondary: hsl(222, 14%, 12%); /* #181b24 - Deeper blue-tinted dark gray */
+  --color-background-tertiary: hsl(222, 14%, 18%); /* #232836 - Elevated surfaces */
+  
+  /* Card and elevation */
+  --color-card-background: hsl(222, 14%, 10%); /* #13151e - Slightly elevated surface */
+  --color-elevation-1: 0 2px 5px hsla(0, 0%, 0%, 0.4), 0 1px 3px hsla(0, 0%, 0%, 0.5);
+  --color-elevation-2: 0 4px 8px hsla(0, 0%, 0%, 0.4), 0 2px 4px hsla(0, 0%, 0%, 0.5);
+  
+  /* Text colors - Brighter for better readability */
+  --color-text: hsl(220, 10%, 95%); /* #f0f1f5 - Brighter off-white with blue tint */
+  --color-text-secondary: hsl(220, 10%, 70%); /* #b3b6c4 - Brighter muted gray with blue tint */
+  
+  /* Border with color temperature - More pronounced */
+  --color-border: hsl(222, 14%, 25%); /* #333a4d - More visible borders */
+  
+  /* Interactive elements */
+  --color-hover: hsla(210, 90%, 60%, 0.15); /* Primary with 15% opacity for better visibility */
+  --color-focus-ring: hsla(210, 90%, 60%, 0.5); /* #66a3ff80 - Focus indicator */
+}
+
+/* Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html.app-html {
+  height: 100%;
+  background-color: var(--color-background);
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-family);
+  font-size: 16px;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+/* Smooth transitions when switching themes */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button {
+  font-family: var(--font-family);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.mt-5 { margin-top: 3rem; }
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 3rem; }
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-text-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text);
+}
+
+/* Dark theme specific component overrides */
+body.dark-theme {
+  /* Apply dark background to the entire page and all its elements */
+  background-color: var(--color-background);
+  color: var(--color-text);
+  
+  /* Critical fix for the HTML and body tags */
+  html, body {
+    background-color: var(--color-background) !important;
+  }
+  
+  /* App root container */
+  app-root {
+    display: block;
+    background-color: var(--color-background);
+    min-height: 100vh;
+  }
+  
+  /* Main sections */
+  main, header, section, aside, footer, nav, div {
+    background-color: inherit;
+  }
+  
+  /* Fix for landing main section which might have a white background */
+  .landing-main {
+    background-color: var(--color-background);
+  }
+  
+  /* Ensure content sections have proper background */
+  .content-area {
+    background-color: var(--color-background);
+  }
+
+  /* Hero section - adjust gradient for dark mode */
+  .hero-section {
+    background: linear-gradient(135deg, hsl(210, 90%, 30%) 0%, hsl(210, 90%, 20%) 100%);
+  }
+  
+  /* Calendar day with exams - improved visibility */
+  .calendar-table td.has-exam {
+    background-color: hsla(210, 90%, 60%, 0.15); /* Slightly more vibrant */
+  }
+  
+  /* Calendar day buttons - white text */
+  .calendar-day-button {
+    color: var(--color-text);
+  }
+
+  /* Filter headers - white text */
+  .filter-header {
+    color: var(--color-text);
+  }
+  
+  /* Logo in dark mode */
+  .logo {
+    filter: brightness(0) invert(1); /* Make SVG logo white */
+  }
+
+  /* Interactive buttons - improved states */
+  .action-button:hover {
+    background-color: var(--color-primary-light);
+    box-shadow: var(--color-elevation-1);
+  }
+
+  /* Form elements */
+  input, select, textarea {
+    background-color: hsl(222, 14%, 12%); /* Match background-secondary */
+    border-color: var(--color-border);
+    color: var(--color-text);
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-focus-ring);
+  }
+  
+  /* Tooltips and popovers */
+  .exam-tooltip {
+    background-color: hsl(222, 14%, 14%); /* Slightly elevated */
+    box-shadow: var(--color-elevation-2);
+    
+    .tooltip-arrow {
+      background-color: hsl(222, 14%, 14%); /* Match tooltip */
+    }
+  }
+  
+  /* Modal overlay - reduced opacity */
+  .modal-overlay {
+    background-color: hsla(0, 0%, 0%, 0.8);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar-track {
+    background: hsl(222, 14%, 12%);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(222, 14%, 30%);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(222, 14%, 40%);
+  }
+} 

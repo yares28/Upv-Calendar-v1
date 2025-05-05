@@ -1,0 +1,20 @@
+<div class="tooltip-wrapper" [ngClass]="{'visible': isVisible}" *ngIf="isVisible">
+  <div 
+    #tooltipContainer 
+    class="tooltip-container"
+    [@tooltipAnimation]
+    [ngStyle]="tooltipStyles" 
+    role="tooltip"
+    tabindex="-1">
+    
+    <div class="tooltip-content">
+      <ng-content></ng-content>
+    </div>
+    
+    <div 
+      *ngIf="showArrow && !isMobile" 
+      class="tooltip-arrow"
+      [ngStyle]="arrowStyles">
+    </div>
+  </div>
+</div> 

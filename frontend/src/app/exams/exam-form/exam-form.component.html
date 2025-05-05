@@ -1,0 +1,196 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>{{ isEditing ? 'Edit Exam' : 'Create New Exam' }}</h2>
+    </div>
+    <div class="card-body">
+      <!-- Loading indicator -->
+      <div *ngIf="loading" class="text-center my-4">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+
+      <form [formGroup]="examForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+        <div class="row">
+          <!-- First column -->
+          <div class="col-md-6">
+            <!-- Subject Info -->
+            <div class="form-group mb-3">
+              <label for="subjectCode">Subject Code*</label>
+              <input 
+                type="text" 
+                id="subjectCode" 
+                formControlName="subjectCode" 
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['subjectCode'].errors}"
+              >
+              <div *ngIf="submitted && f['subjectCode'].errors" class="invalid-feedback">
+                <div *ngIf="f['subjectCode'].errors['required']">Subject code is required</div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="subjectName">Subject Name*</label>
+              <input 
+                type="text" 
+                id="subjectName" 
+                formControlName="subjectName" 
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['subjectName'].errors}"
+              >
+              <div *ngIf="submitted && f['subjectName'].errors" class="invalid-feedback">
+                <div *ngIf="f['subjectName'].errors['required']">Subject name is required</div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="acronym">Acronym</label>
+              <input 
+                type="text" 
+                id="acronym" 
+                formControlName="acronym" 
+                class="form-control"
+              >
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="degree">Degree*</label>
+              <select 
+                id="degree" 
+                formControlName="degree" 
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['degree'].errors}"
+              >
+                <option value="">Select a degree</option>
+                <option value="Computer Engineering">Computer Engineering</option>
+                <option value="Data Science">Data Science</option>
+                <option value="Software Engineering">Software Engineering</option>
+              </select>
+              <div *ngIf="submitted && f['degree'].errors" class="invalid-feedback">
+                <div *ngIf="f['degree'].errors['required']">Degree is required</div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="courseYear">Course Year*</label>
+              <select 
+                id="courseYear" 
+                formControlName="courseYear" 
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['courseYear'].errors}"
+              >
+                <option [ngValue]="1">1st Year</option>
+                <option [ngValue]="2">2nd Year</option>
+                <option [ngValue]="3">3rd Year</option>
+                <option [ngValue]="4">4th Year</option>
+              </select>
+              <div *ngIf="submitted && f['courseYear'].errors" class="invalid-feedback">
+                <div *ngIf="f['courseYear'].errors['required']">Course year is required</div>
+                <div *ngIf="f['courseYear'].errors['min']">Course year must be positive</div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="semester">Semester*</label>
+              <select 
+                id="semester" 
+                formControlName="semester" 
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['semester'].errors}"
+              >
+                <option [ngValue]="1">1st Semester</option>
+                <option [ngValue]="2">2nd Semester</option>
+              </select>
+              <div *ngIf="submitted && f['semester'].errors" class="invalid-feedback">
+                <div *ngIf="f['semester'].errors['required']">Semester is required</div>
+                <div *ngIf="f['semester'].errors['min'] || f['semester'].errors['max']">
+                  Semester must be 1 or 2
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Second column -->
+          <div class="col-md-6">
+            <!-- Exam Info -->
+            <div class="form-group mb-3">
+              <label for="examDay">Exam Date*</label>
+              <input 
+                type="date" 
+                id="examDay" 
+                formControlName="examDay" 
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['examDay'].errors}"
+              >
+              <div *ngIf="submitted && f['examDay'].errors" class="invalid-feedback">
+                <div *ngIf="f['examDay'].errors['required']">Exam date is required</div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="examHour">Exam Time*</label>
+              <input 
+                type="time" 
+                id="examHour" 
+                formControlName="examHour" 
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['examHour'].errors}"
+              >
+              <div *ngIf="submitted && f['examHour'].errors" class="invalid-feedback">
+                <div *ngIf="f['examHour'].errors['required']">Exam time is required</div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="durationMin">Duration (minutes)*</label>
+              <input 
+                type="number" 
+                id="durationMin" 
+                formControlName="durationMin" 
+                class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['durationMin'].errors}"
+              >
+              <div *ngIf="submitted && f['durationMin'].errors" class="invalid-feedback">
+                <div *ngIf="f['durationMin'].errors['required']">Duration is required</div>
+                <div *ngIf="f['durationMin'].errors['min']">Duration must be positive</div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="examPlace">Exam Place</label>
+              <input 
+                type="text" 
+                id="examPlace" 
+                formControlName="examPlace" 
+                class="form-control"
+              >
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="comment">Comments</label>
+              <textarea 
+                id="comment" 
+                formControlName="comment" 
+                class="form-control" 
+                rows="4"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions mt-3">
+          <button type="submit" class="btn btn-primary me-2" [disabled]="loading">
+            {{ isEditing ? 'Update' : 'Create' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 

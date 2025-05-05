@@ -1,0 +1,36 @@
+.card {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 15px 20px;
+  
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #212529;
+  }
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-group {
+  label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+  }
+}
+
+.form-actions {
+  border-top: 1px solid #e9ecef;
+  padding-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+} 

@@ -1,0 +1,204 @@
+<div class="exams-container">
+  <div class="exams-header">
+    <h1>ETSINF Exams</h1>
+    <button class="btn btn-primary" (click)="createExam()">Create New Exam</button>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters-container">
+    <!-- Main search -->
+    <div class="form-group">
+      <input type="text" class="form-control" [(ngModel)]="searchQuery" 
+        placeholder="Search by subject name, code or place..." 
+        (keyup.enter)="applyFilters()">
+    </div>
+
+    <!-- School filter - fixed to ETSINF -->
+    <div class="form-group">
+      <label for="schoolFilter">School</label>
+      <select class="form-control" id="schoolFilter" disabled>
+        <option value="ETSINF">ETSINF</option>
+      </select>
+    </div>
+
+    <!-- Degree filter with search -->
+    <div class="form-group filter-dropdown">
+      <label for="degreeFilter">Degree <span class="filter-required">*</span></label>
+      <div class="search-box">
+        <input type="text" class="form-control" [(ngModel)]="degreeSearch" 
+          placeholder="Search degrees...">
+      </div>
+      <select class="form-control" id="degreeFilter" [(ngModel)]="selectedDegree" 
+        (change)="onDegreeChange()" [class.filter-highlight]="!selectedDegree">
+        <option [ngValue]="null">Select a Degree</option>
+        <option *ngFor="let degree of filteredDegrees" [value]="degree">{{ degree }}</option>
+      </select>
+      <div class="filter-hint" *ngIf="!selectedDegree">
+        * You must select a degree to see subjects
+      </div>
+    </div>
+
+    <!-- Course Year filter -->
+    <div class="form-group">
+      <label for="yearFilter">Course Year</label>
+      <select class="form-control" id="yearFilter" [(ngModel)]="selectedYear" 
+        (change)="onYearChange()" [disabled]="!selectedDegree">
+        <option [ngValue]="null">All Years</option>
+        <option *ngFor="let year of years" [ngValue]="year">{{ year }}</option>
+      </select>
+    </div>
+
+    <!-- Semester filter -->
+    <div class="form-group">
+      <label for="semesterFilter">Semester</label>
+      <select class="form-control" id="semesterFilter" [(ngModel)]="selectedSemester" 
+        (change)="onSemesterChange()" [disabled]="!selectedDegree">
+        <option [ngValue]="null">All Semesters</option>
+        <option *ngFor="let semester of filteredSemesters" [value]="semester.toString()">{{ semester }}</option>
+      </select>
+    </div>
+
+    <!-- Subject filter - only enabled when a degree is selected -->
+    <div class="form-group filter-dropdown">
+      <label for="subjectFilter">Subject</label>
+      <div class="search-box">
+        <input type="text" class="form-control" [(ngModel)]="subjectSearch" 
+          placeholder="Search subjects..." [disabled]="!selectedDegree">
+      </div>
+      <select class="form-control" id="subjectFilter" [(ngModel)]="selectedSubject" 
+        (change)="applyFilters()" [disabled]="!selectedDegree">
+        <option [ngValue]="null">{{ subjects.length > 0 ? 'All Subjects' : 'No subjects available' }}</option>
+        <option *ngFor="let subject of filteredSubjects" [value]="subject.name">
+          {{ subject.name }} ({{ subject.acronym }})
+        </option>
+      </select>
+      <div class="filter-hint" *ngIf="selectedDegree && subjects.length === 0">
+        No subjects found for the selected filters
+      </div>
+    </div>
+
+    <div class="filter-buttons">
+      <button class="btn btn-outline-primary" (click)="applyFilters()">Apply Filters</button>
+      <button class="btn btn-outline-secondary" (click)="resetFilters()">Reset</button>
+    </div>
+  </div>
+
+  <!-- Loading indicator -->
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Error message -->
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <!-- Exams table -->
+  <div class="table-responsive" *ngIf="exams$ | async as exams">
+    <div *ngIf="exams.length === 0" class="no-results">
+      No exams found for the selected filters
+    </div>
+    <table class="table table-striped" *ngIf="exams.length > 0">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Code</th>
+          <th>Date & Time</th>
+          <th>Duration</th>
+          <th>School</th>
+          <th>Degree</th>
+          <th>Year</th>
+          <th>Semester</th>
+          <th>Exam Place</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exam of exams">
+          <td>{{ exam.subjectName }}</td>
+          <td>{{ exam.subjectCode }}</td>
+          <td>{{ formatExamDate(exam.examDay, exam.examHour) }}</td>
+          <td>{{ exam.durationMin }} min</td>
+          <td>{{ getSchoolFromDegree(exam.degree) }}</td>
+          <td>{{ exam.degree }}</td>
+          <td>{{ exam.courseYear }}</td>
+          <td>{{ exam.semester }}</td>
+          <td>{{ exam.examPlace || 'Not specified' }}</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-info" (click)="viewExam(exam.id!)">View</button>
+              <button class="btn btn-sm btn-warning" (click)="editExam(exam.id!)">Edit</button>
+              <button class="btn btn-sm btn-danger" (click)="deleteExam(exam.id!)">Delete</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+.filters-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  min-width: 200px;
+}
+
+.filter-dropdown {
+  position: relative;
+}
+
+.search-box {
+  margin-bottom: 5px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+/* Visual indication for disabled filters */
+select:disabled, input:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+}
+
+/* Filter highlighting and hints */
+.filter-required {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.filter-highlight {
+  border-color: #dc3545;
+}
+
+.filter-hint {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 2px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+</style> 

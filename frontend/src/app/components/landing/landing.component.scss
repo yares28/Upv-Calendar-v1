@@ -1,0 +1,818 @@
+/* Landing Header */
+.landing-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-background);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  background-color: transparent;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: var(--color-primary);
+    color: white;
+  }
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  
+  &:hover {
+    background-color: var(--color-background-secondary);
+  }
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+}
+
+.cta-button {
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  color: var(--color-primary);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Main Content Area */
+.landing-main {
+  width: 100%;
+  min-height: calc(100vh - 72px); /* Subtract header height */
+  background-color: var(--color-background);
+}
+
+.content-area {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  background-color: var(--color-background);
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card Styling */
+.card {
+  background-color: var(--color-card-background);
+  border-radius: 8px;
+  box-shadow: var(--color-elevation-1);
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease;
+  
+  &:hover {
+    box-shadow: var(--color-elevation-2);
+  }
+}
+
+/* Filters Sidebar */
+.filters-sidebar {
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+  
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+  }
+}
+
+/* Search box in filter dropdowns */
+.search-box {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-background-secondary);
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background-color: var(--color-card-background);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+    }
+    
+    &::placeholder {
+      color: var(--color-text-secondary);
+      opacity: 0.7;
+    }
+  }
+}
+
+.filter-group {
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.filter-header {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-background-secondary);
+  border: none;
+  text-align: left;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
+  .arrow {
+    transition: transform 0.2s ease;
+  }
+  
+  &.open .arrow {
+    transform: rotate(180deg);
+  }
+  
+  &:hover {
+    background-color: var(--color-hover);
+  }
+}
+
+.filter-options {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  
+  &.open {
+    max-height: 250px;
+    overflow-y: auto;
+    border-top: none; /* Remove top border since search box has bottom border */
+  }
+}
+
+.checkbox-item {
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: var(--color-hover);
+  }
+  
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  input[type="checkbox"] {
+    accent-color: var(--color-primary);
+  }
+}
+
+/* Calendar Actions */
+.calendar-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: var(--color-primary-dark);
+  }
+  
+  &:disabled {
+    background-color: var(--color-border);
+    cursor: not-allowed;
+  }
+}
+
+.export-actions {
+  display: flex;
+  gap: 0.5rem;
+  
+  .export-button {
+    flex: 1;
+    background-color: var(--color-secondary);
+    
+    &:hover {
+      background-color: var(--color-secondary-dark);
+    }
+  }
+}
+
+.export-info {
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+/* Calendar Display Area */
+.calendar-display-area {
+  width: 100%;
+}
+
+.no-exams-message {
+  text-align: center;
+  padding: 3rem;
+  color: var(--color-text-secondary);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.month-block {
+  background-color: var(--color-card-background);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: var(--color-elevation-1);
+  transition: transform 0.3s ease;
+  
+  h3 {
+    color: var(--color-primary-light); /* Brighter month names */
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--color-elevation-2);
+  }
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th {
+    padding: 0.5rem;
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-weight: 600;
+  }
+  
+  td {
+    width: 14.28%;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    
+    &.is-empty {
+      background-color: var(--color-background-tertiary);
+    }
+    
+    &.has-exam {
+      background-color: rgba(var(--color-primary-rgb), 0.1);
+    }
+    
+    &.selected .calendar-day-button {
+      background-color: var(--color-primary);
+      color: white;
+      
+      .exam-dot {
+        background-color: white;
+      }
+    }
+  }
+}
+
+.calendar-day-button {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  
+  &:hover {
+    background-color: var(--color-hover);
+    transform: scale(1.05);
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-focus-ring);
+  }
+}
+
+.exam-dot {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+/* Exam Tooltip */
+.exam-tooltip {
+  position: absolute;
+  background-color: var(--color-card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  min-width: 250px;
+  max-width: 300px;
+  z-index: 1000; /* Increased z-index to ensure it's above other elements */
+  
+  .tooltip-content {
+    max-height: 300px;
+    overflow-y: auto;
+    
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: var(--color-background-secondary);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-text-secondary);
+      border-radius: 4px;
+    }
+  }
+  
+  .exam-item {
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    h4 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary);
+    }
+    
+    p {
+      margin: 0.25rem 0;
+      font-size: 0.9rem;
+    }
+  }
+  
+  .tooltip-arrow {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-card-background);
+    box-shadow: inherit;
+    z-index: 99;
+  }
+  
+  // Styling based on placement
+  &[data-placement="top"] .tooltip-arrow {
+    // For top placement, arrow is at the bottom
+    bottom: -6px;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  &[data-placement="bottom"] .tooltip-arrow {
+    // For bottom placement, arrow is at the top
+    top: -6px;
+    box-shadow: -2px -2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  &[data-placement="left"] .tooltip-arrow {
+    // For left placement, arrow is at the right
+    right: -6px;
+    box-shadow: 4px -2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  &[data-placement="right"] .tooltip-arrow {
+    // For right placement, arrow is at the left
+    left: -6px;
+    box-shadow: -2px 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  // Apply entrance animation
+  animation: tooltipFadeIn 0.2s ease-out forwards;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Auth Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.auth-modal {
+  width: 100%;
+  max-width: 400px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  
+  h3 {
+    margin: 0;
+  }
+}
+
+.close-modal-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  
+  &:hover {
+    color: var(--color-text);
+  }
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+  }
+}
+
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  
+  .auth-btn {
+    width: 100%;
+    padding: 0.75rem;
+  }
+  
+  .auth-toggle {
+    text-align: center;
+    font-size: 0.9rem;
+    
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 500;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* Notification Toast */
+.notification-toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  color: white;
+  font-weight: 500;
+  z-index: 1000;
+  animation: slideIn 0.3s ease forwards;
+  box-shadow: var(--color-elevation-2);
+  
+  &.success {
+    background-color: var(--color-success);
+  }
+  
+  &.error {
+    background-color: var(--color-error);
+  }
+  
+  &.warning {
+    background-color: var(--color-warning);
+    color: var(--color-text); /* Ensure readability on yellow */
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Add specific styles for dark mode */
+body.dark-theme {
+  /* Fix for landing page background */
+  .landing-main {
+    background-color: var(--color-background);
+  }
+  
+  .landing-header {
+    background-color: var(--color-background);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .content-area {
+    background-color: var(--color-background);
+  }
+  
+  .header-title {
+    color: var(--color-text); /* Make header title white in dark mode */
+  }
+  
+  .filter-header {
+    background-color: var(--color-background-tertiary); /* Slightly darker background for better contrast */
+  }
+  
+  /* Enhanced calendar styles for dark mode */
+  .calendar-grid {
+    gap: 1.5rem;
+  }
+  
+  .calendar-table {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-card-background);
+    
+    th {
+      color: var(--color-text); /* Make day names white */
+      background-color: var(--color-background-tertiary);
+      padding: 0.75rem 0.5rem;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+    
+    td {
+      border: 1px solid var(--color-border);
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+      
+      &.is-empty {
+        background-color: var(--color-background); /* Darker background for empty days */
+        opacity: 0.5;
+      }
+      
+      &.has-exam {
+        background-color: hsla(210, 90%, 30%, 0.3); /* More visible exam highlight */
+        position: relative;
+        
+        &::after {
+          border: 2px solid hsla(210, 90%, 60%, 0.4);
+          border-radius: 4px;
+        }
+      }
+      
+      &.selected {
+        position: relative;
+        
+        &::after {
+          border: 2px solid var(--color-primary);
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+  
+  .calendar-day-button {
+    font-weight: 500; /* Bolder text for better readability */
+    color: var(--color-text);
+    font-size: 1.05rem;
+    z-index: 2;
+    position: relative;
+    
+    &:hover {
+      background-color: hsla(210, 90%, 40%, 0.2); /* More visible hover state */
+    }
+  }
+  
+  .exam-dot {
+    width: 7px;
+    height: 7px;
+    background-color: var(--color-primary-light); /* Brighter dot */
+    box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.2); /* Light glow effect */
+    z-index: 2;
+  }
+  
+  .month-block {
+    background-color: var(--color-card-background);
+    border: 1px solid var(--color-border);
+  }
+  
+  /* Enhance contrast for card backgrounds */
+  .card {
+    background-color: var(--color-card-background);
+    border: 1px solid var(--color-border);
+  }
+  
+  /* Fix for filter options */
+  .filter-options {
+    background-color: var(--color-card-background);
+  }
+  
+  .checkbox-item {
+    color: var(--color-text);
+  }
+}
+
+.subject-acronym {
+  font-size: 0.85em;
+  opacity: 0.8;
+  color: var(--text-secondary);
+  margin-left: 4px;
+}
+
+/* Dark mode adjustments */
+:host-context(body.dark-theme) {
+  .search-box {
+    background-color: var(--color-background-secondary);
+    
+    input[type="text"] {
+      background-color: var(--color-background-tertiary);
+      border-color: var(--color-border);
+      color: var(--color-text);
+      
+      &:focus {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 2px rgba(102, 163, 255, 0.2);
+      }
+      
+      &::placeholder {
+        color: var(--color-text-secondary);
+      }
+    }
+  }
+  
+  .card {
+    background-color: var(--color-card-background);
+    border: 1px solid var(--color-border);
+  }
+  
+  /* Fix for filter options */
+  .filter-options {
+    background-color: var(--color-card-background);
+  }
+  
+  .checkbox-item {
+    color: var(--color-text);
+  }
+} 

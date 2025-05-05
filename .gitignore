@@ -1,0 +1,52 @@
+# Environment variables
+.env
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Angular
+frontend/.angular/
+frontend/dist/
+frontend/node_modules/
+
+# Maven
+backend/target/
+*.jar
+*.war
+*.ear
+*.class
+
+# Spring Boot
+**/application-*.yml
+**/application-*.properties
+
+# IDEs and editors
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Docker
+.docker/
+*.env
+!env.example 
