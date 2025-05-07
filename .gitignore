@@ -49,4 +49,11 @@ logs/
 # Docker
 .docker/
 *.env
-!env.example 
+!env.example
+
+# Large binary files
+pgclient.exe
+*.exe
+*.bin
+*.iso
+*.dmg 
